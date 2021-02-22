@@ -27,6 +27,18 @@ post '/visit' do
 		@error = "Введите имя"
 		return erb :visit
 	end
+	if @phone == ''
+		@error = "Введите телефон"
+		return erb :visit
+	end
+
+	if @datetime == ''
+		@error = "Неправильная дата"
+	end
+	if @error != ''
+		return erb :visit
+	end
+
 	@title = "Все готово!"
 	@message = "#{@username}, благодарим за запись, ждем вас в #{@datetime}, вы записались к #{@option}"
 	f = File.open './public/vizit_users.txt', 'a'
