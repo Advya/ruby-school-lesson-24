@@ -8,6 +8,7 @@ get '/' do
 end
 
 get '/about' do
+	@error = 'something wrong!'
 	erb :about
 end
 
@@ -22,6 +23,10 @@ post '/visit' do
 	@option = params[:option]
 	@color = params[:color]
 
+	if @username == ''
+		@error = "Введите имя"
+		return erb :visit
+	end
 	@title = "Все готово!"
 	@message = "#{@username}, благодарим за запись, ждем вас в #{@datetime}, вы записались к #{@option}"
 	f = File.open './public/vizit_users.txt', 'a'
