@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
+
+
 #ruby comment test
 
 get '/' do
@@ -52,7 +54,20 @@ end
 post '/contacts' do
 	@email = params[:email]
 	@textmessage = params[:textmessage]
+	###
 
+	###
+
+
+	if @email ==''
+		@error = "Введите емеил"
+		return erb :contacts
+	end
+	if @textmessage == ''
+		@error = "Нужно ввести сообщение"
+		return erb :contacts
+	end
+	
 	@title = "Все готово!"
 	@message = "Мы свяжемя с вами по этому емэйл: #{@email}"
 
