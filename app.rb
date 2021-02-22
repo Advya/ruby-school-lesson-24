@@ -23,21 +23,18 @@ post '/visit' do
 	@option = params[:option]
 	@color = params[:color]
 
-	if @username == ''
-		@error = "Введите имя"
-		return erb :visit
-	end
-	if @phone == ''
-		@error = "Введите телефон"
-		return erb :visit
+
+	hh = {:username => 'Введите имя',
+		  :phone => 'Введите телефон',
+		  :datetime => 'Неправильная дата'}
+	hh.each do |key, value|
+		if params[key]==''
+			@error = hh[key]
+			return erb :visit
+		end
 	end
 
-	if @datetime == ''
-		@error = "Неправильная дата"
-	end
-	if @error != ''
-		return erb :visit
-	end
+	
 
 	@title = "Все готово!"
 	@message = "#{@username}, благодарим за запись, ждем вас в #{@datetime}, вы записались к #{@option}"
